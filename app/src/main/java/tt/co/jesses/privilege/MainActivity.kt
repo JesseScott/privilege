@@ -27,14 +27,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PrivilegeTheme {
-                PrivilegeApp()
+                PrivilegeAppContent()
             }
         }
     }
 }
 
 @Composable
-fun PrivilegeApp() {
+fun PrivilegeAppContent() {
     val navController = rememberNavController()
     val viewModel: QuestionnaireViewModel = hiltViewModel()
     val isChecklistFilled by viewModel.isPrivilegeChecklistFilled.collectAsStateWithLifecycle()
