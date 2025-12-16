@@ -27,6 +27,12 @@ class QuestionnaireViewModelTest {
 
     private val isPrivilegeChecklistFilledFlow = MutableStateFlow(false)
 
+    private val expectedQuestionCount = 5
+    private val firstQuestionId = 1
+    private val firstQuestionAnswer = true
+    private val secondQuestionId = 2
+    private val secondQuestionAnswer = false
+
     @BeforeEach
     fun setup() {
         whenever(userPreferencesRepository.isPrivilegeChecklistFilled).thenReturn(isPrivilegeChecklistFilledFlow)
@@ -36,7 +42,7 @@ class QuestionnaireViewModelTest {
     @Test
     fun `initial state is correct`() = runTest {
         // Verify questions are loaded
-        assertEquals(5, viewModel.questions.size)
+        assertEquals(expectedQuestionCount, viewModel.questions.size)
         assertEquals("Do you feel safe walking alone at night?", viewModel.questions[0].text)
 
         // Verify answers are empty
@@ -49,21 +55,22 @@ class QuestionnaireViewModelTest {
 
     @Test
     fun `submitAnswer updates answers state`() = runTest {
-        viewModel.submitAnswer(1, true)
+        viewModel.submitAnswer(firstQuestionId, firstQuestionAnswer)
 
         val answers = viewModel.answers.value
         assertEquals(1, answers.size)
-        assertTrue(answers[1] == true)
+        assertTrue(answers[firstQuestionId] == firstQuestionAnswer)
 
-        viewModel.submitAnswer(2, false)
+        viewModel.submitAnswer(secondQuestionId, secondQuestionAnswer)
         val updatedAnswers = viewModel.answers.value
         assertEquals(2, updatedAnswers.size)
-        assertTrue(updatedAnswers[2] == false)
+        assertTrue(updatedAnswers[secondQuestionId] == secondQuestionAnswer)
 
         // Update existing answer
-        viewModel.submitAnswer(1, false)
+        val updatedFirstAnswer = !firstQuestionAnswer
+        viewModel.submitAnswer(firstQuestionId, updatedFirstAnswer)
         val modifiedAnswers = viewModel.answers.value
-        assertTrue(modifiedAnswers[1] == false)
+        assertTrue(modifiedAnswers[firstQuestionId] == updatedFirstAnswer)
     }
 
     @Test
@@ -74,7 +81,7 @@ class QuestionnaireViewModelTest {
 
     @Test
     fun `resetQuestionnaire resets answers and calls repository`() = runTest {
-        viewModel.submitAnswer(1, true)
+        viewModel.submitAnswer(firstQuestionId, firstQuestionAnswer)
         assertFalse(viewModel.answers.value.isEmpty())
 
         viewModel.resetQuestionnaire()
