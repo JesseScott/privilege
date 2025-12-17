@@ -23,10 +23,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import tt.co.jesses.privilege.R
 import tt.co.jesses.privilege.ui.viewmodel.QuestionnaireViewModel
 
 @Composable
@@ -38,10 +44,16 @@ fun QuestionnaireScreen(
     val answers by viewModel.answers.collectAsStateWithLifecycle()
     val pagerState = rememberPagerState(pageCount = { questions.size })
     val scope = rememberCoroutineScope()
+    val haptic = LocalHapticFeedback.current
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
+            val progressDescription = stringResource(
+                R.string.progress_question_count,
+                pagerState.currentPage + 1,
+                questions.size
+            )
             LinearProgressIndicator(
                 progress = {
                     if (questions.isNotEmpty()) {
@@ -52,7 +64,8 @@ fun QuestionnaireScreen(
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(16.dp)
+                    .semantics { contentDescription = progressDescription },
             )
         }
     ) { innerPadding ->
@@ -90,6 +103,7 @@ fun QuestionnaireScreen(
                     ) {
                         Button(
                             onClick = {
+                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                 viewModel.submitAnswer(question.id, true)
                                 if (page < questions.size - 1) {
                                     scope.launch {
@@ -106,13 +120,14 @@ fun QuestionnaireScreen(
                             ),
                             modifier = Modifier.weight(1f)
                         ) {
-                            Text("Yes")
+                            Text(stringResource(R.string.action_yes))
                         }
 
                         Spacer(modifier = Modifier.width(16.dp))
 
                         Button(
                             onClick = {
+                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                 viewModel.submitAnswer(question.id, false)
                                 if (page < questions.size - 1) {
                                     scope.launch {
@@ -129,7 +144,7 @@ fun QuestionnaireScreen(
                             ),
                             modifier = Modifier.weight(1f)
                         ) {
-                            Text("No")
+                            Text(stringResource(R.string.action_no))
                         }
                     }
                 }
