@@ -3,4 +3,6 @@
     <string name="action_yes">Yes</string>
     <string name="action_no">No</string>
     <string name="progress_question_count">Question %1$d of %2$d</string>
+    <string name="welcome_title">Welcome.\nLet\'s check your Privilege.</string>
+    <string name="action_start">Start</string>
 </resources>
