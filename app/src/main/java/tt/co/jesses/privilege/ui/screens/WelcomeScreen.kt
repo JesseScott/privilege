@@ -7,17 +7,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import tt.co.jesses.privilege.R
 
 @Composable
 fun WelcomeScreen(
     onStartClicked: () -> Unit
 ) {
+    val haptic = LocalHapticFeedback.current
+
     Scaffold(
         modifier = Modifier.fillMaxSize()
     ) { innerPadding ->
@@ -30,14 +37,20 @@ fun WelcomeScreen(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Welcome.\nLet's check your Privilege.",
+                text = stringResource(R.string.welcome_title),
                 style = MaterialTheme.typography.headlineMedium,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(bottom = 32.dp)
             )
 
-            Button(onClick = onStartClicked) {
-                Text(text = "Start")
+            Button(
+                onClick = {
+                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                    onStartClicked()
+                },
+                modifier = Modifier.heightIn(min = 48.dp)
+            ) {
+                Text(text = stringResource(R.string.action_start))
             }
         }
     }
