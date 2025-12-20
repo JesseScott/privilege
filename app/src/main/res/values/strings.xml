@@ -5,4 +5,9 @@
     <string name="progress_question_count">Question %1$d of %2$d</string>
     <string name="welcome_title">Welcome.\nLet\'s check your Privilege.</string>
     <string name="action_start">Start</string>
+    <string name="results_title">Results</string>
+    <string name="result_answer_label">Answer: </string>
+    <string name="result_answer_unanswered">Unanswered</string>
+    <string name="action_reset">Reset</string>
+    <string name="cd_result_item">Question: %1$s, Answer: %2$s</string>
 </resources>
