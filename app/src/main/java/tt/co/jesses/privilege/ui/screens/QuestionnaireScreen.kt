@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
@@ -118,7 +119,7 @@ fun QuestionnaireScreen(
                                 containerColor = if (selectedAnswer == true) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer,
                                 contentColor = if (selectedAnswer == true) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSecondaryContainer
                             ),
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier.weight(1f).heightIn(min = 48.dp)
                         ) {
                             Text(stringResource(R.string.action_yes))
                         }
@@ -142,7 +143,7 @@ fun QuestionnaireScreen(
                                 containerColor = if (selectedAnswer == false) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer,
                                 contentColor = if (selectedAnswer == false) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSecondaryContainer
                             ),
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier.weight(1f).heightIn(min = 48.dp)
                         ) {
                             Text(stringResource(R.string.action_no))
                         }
