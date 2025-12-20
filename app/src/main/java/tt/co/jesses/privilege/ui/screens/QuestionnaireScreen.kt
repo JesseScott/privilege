@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import tt.co.jesses.privilege.R
+import tt.co.jesses.privilege.ui.theme.minTouchTarget
 import tt.co.jesses.privilege.ui.viewmodel.QuestionnaireViewModel
 
 @Composable
@@ -118,7 +119,7 @@ fun QuestionnaireScreen(
                                 containerColor = if (selectedAnswer == true) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer,
                                 contentColor = if (selectedAnswer == true) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSecondaryContainer
                             ),
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier.weight(1f).minTouchTarget()
                         ) {
                             Text(stringResource(R.string.action_yes))
                         }
@@ -142,7 +143,7 @@ fun QuestionnaireScreen(
                                 containerColor = if (selectedAnswer == false) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer,
                                 contentColor = if (selectedAnswer == false) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSecondaryContainer
                             ),
-                            modifier = Modifier.weight(1f)
+                            modifier = Modifier.weight(1f).minTouchTarget()
                         ) {
                             Text(stringResource(R.string.action_no))
                         }

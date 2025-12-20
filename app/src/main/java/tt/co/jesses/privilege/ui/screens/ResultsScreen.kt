@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import tt.co.jesses.privilege.R
+import tt.co.jesses.privilege.ui.theme.minTouchTarget
 import tt.co.jesses.privilege.ui.viewmodel.QuestionnaireViewModel
 
 @Composable
@@ -105,6 +106,7 @@ fun ResultsScreen(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .padding(16.dp)
+                    .minTouchTarget()
             ) {
                 Text(stringResource(R.string.action_reset))
             }
