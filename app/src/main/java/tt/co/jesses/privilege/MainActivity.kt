@@ -29,6 +29,8 @@ class MainActivity : ComponentActivity() {
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
         )
+        // Prevent tapjacking by filtering touches when the window is obscured
+        window.decorView.filterTouchesWhenObscured = true
         enableEdgeToEdge()
         setContent {
             PrivilegeTheme {
