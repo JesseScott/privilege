@@ -9,5 +9,6 @@
     <string name="result_answer_label">Answer: </string>
     <string name="result_answer_unanswered">Unanswered</string>
     <string name="action_reset">Reset</string>
+    <string name="action_retake_questionnaire">Retake Questionnaire</string>
     <string name="cd_result_item">Question: %1$s, Answer: %2$s</string>
 </resources>

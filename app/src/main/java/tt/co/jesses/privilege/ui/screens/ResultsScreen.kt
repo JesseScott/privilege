@@ -113,7 +113,7 @@ fun ResultsScreen(viewModel: QuestionnaireViewModel) {
                     .padding(16.dp)
                     .minTouchTarget()
             ) {
-                Text(stringResource(R.string.action_reset))
+                Text(stringResource(R.string.action_retake_questionnaire))
             }
         }
     }
