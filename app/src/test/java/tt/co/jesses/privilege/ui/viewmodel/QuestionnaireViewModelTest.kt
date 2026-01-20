@@ -17,7 +17,6 @@ import org.mockito.kotlin.whenever
 import tt.co.jesses.privilege.data.UserPreferencesRepository
 
 class QuestionnaireViewModelTest {
-
     @JvmField
     @RegisterExtension
     val mainDispatcherExtension = MainDispatcherExtension()
@@ -35,7 +34,9 @@ class QuestionnaireViewModelTest {
 
     @BeforeEach
     fun setup() {
-        whenever(userPreferencesRepository.isPrivilegeChecklistFilled).thenReturn(isPrivilegeChecklistFilledFlow)
+        whenever(
+            userPreferencesRepository.isPrivilegeChecklistFilled
+        ).thenReturn(isPrivilegeChecklistFilledFlow)
         viewModel = QuestionnaireViewModel(userPreferencesRepository)
     }
 

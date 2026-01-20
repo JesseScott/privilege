@@ -6,12 +6,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
@@ -23,7 +21,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -42,10 +39,7 @@ import tt.co.jesses.privilege.ui.theme.minTouchTarget
 import tt.co.jesses.privilege.ui.viewmodel.QuestionnaireViewModel
 
 @Composable
-fun QuestionnaireScreen(
-    viewModel: QuestionnaireViewModel,
-    onFinished: () -> Unit
-) {
+fun QuestionnaireScreen(viewModel: QuestionnaireViewModel, onFinished: () -> Unit) {
     val questions = viewModel.questions
     val answers by viewModel.answers.collectAsStateWithLifecycle()
     val pagerState = rememberPagerState(pageCount = { questions.size })
@@ -55,11 +49,12 @@ fun QuestionnaireScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            val progressDescription = stringResource(
-                R.string.progress_question_count,
-                pagerState.currentPage + 1,
-                questions.size
-            )
+            val progressDescription =
+                stringResource(
+                    R.string.progress_question_count,
+                    pagerState.currentPage + 1,
+                    questions.size
+                )
             LinearProgressIndicator(
                 progress = {
                     if (questions.isNotEmpty()) {
@@ -68,21 +63,24 @@ fun QuestionnaireScreen(
                         0f
                     }
                 },
-                modifier = Modifier
+                modifier =
+                Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
-                    .semantics { contentDescription = progressDescription },
+                    .semantics { contentDescription = progressDescription }
             )
         }
     ) { innerPadding ->
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
             HorizontalPager(
                 state = pagerState,
-                modifier = Modifier
+                modifier =
+                Modifier
                     .weight(1f)
                     .fillMaxWidth()
             ) { page ->
@@ -90,7 +88,8 @@ fun QuestionnaireScreen(
                 val selectedAnswer = answers[question.id]
 
                 Column(
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .fillMaxSize()
                         .padding(32.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -120,9 +119,24 @@ fun QuestionnaireScreen(
                                     onFinished()
                                 }
                             },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = if (selectedAnswer == true) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer,
-                                contentColor = if (selectedAnswer == true) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSecondaryContainer
+                            colors =
+                            ButtonDefaults.buttonColors(
+                                containerColor =
+                                if (selectedAnswer ==
+                                    true
+                                ) {
+                                    MaterialTheme.colorScheme.primary
+                                } else {
+                                    MaterialTheme.colorScheme.secondaryContainer
+                                },
+                                contentColor =
+                                if (selectedAnswer ==
+                                    true
+                                ) {
+                                    MaterialTheme.colorScheme.onPrimary
+                                } else {
+                                    MaterialTheme.colorScheme.onSecondaryContainer
+                                }
                             ),
                             modifier = Modifier.weight(1f).minTouchTarget()
                         ) {
@@ -149,9 +163,24 @@ fun QuestionnaireScreen(
                                     onFinished()
                                 }
                             },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = if (selectedAnswer == false) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer,
-                                contentColor = if (selectedAnswer == false) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSecondaryContainer
+                            colors =
+                            ButtonDefaults.buttonColors(
+                                containerColor =
+                                if (selectedAnswer ==
+                                    false
+                                ) {
+                                    MaterialTheme.colorScheme.primary
+                                } else {
+                                    MaterialTheme.colorScheme.secondaryContainer
+                                },
+                                contentColor =
+                                if (selectedAnswer ==
+                                    false
+                                ) {
+                                    MaterialTheme.colorScheme.onPrimary
+                                } else {
+                                    MaterialTheme.colorScheme.onSecondaryContainer
+                                }
                             ),
                             modifier = Modifier.weight(1f).minTouchTarget()
                         ) {

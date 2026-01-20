@@ -6,25 +6,26 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user_preferences")
 
-class UserPreferencesRepository @Inject constructor(
-    private val dataStore: DataStore<Preferences>
-) {
-    private val CHECKLIST_FILLED = booleanPreferencesKey("checklist_filled")
+class UserPreferencesRepository
+@Inject
+constructor(private val dataStore: DataStore<Preferences>) {
+    private val checklistFilled = booleanPreferencesKey("checklist_filled")
 
-    val isPrivilegeChecklistFilled: Flow<Boolean> = dataStore.data
-        .map { preferences ->
-            preferences[CHECKLIST_FILLED] ?: false
-        }
+    val isPrivilegeChecklistFilled: Flow<Boolean> =
+        dataStore.data
+            .map { preferences ->
+                preferences[checklistFilled] ?: false
+            }
 
     suspend fun setPrivilegeChecklistFilled(completed: Boolean) {
         dataStore.edit { preferences ->
-            preferences[CHECKLIST_FILLED] = completed
+            preferences[checklistFilled] = completed
         }
     }
 }
