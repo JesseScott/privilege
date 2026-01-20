@@ -30,9 +30,7 @@ import tt.co.jesses.privilege.ui.theme.minTouchTarget
 import tt.co.jesses.privilege.ui.viewmodel.QuestionnaireViewModel
 
 @Composable
-fun ResultsScreen(
-    viewModel: QuestionnaireViewModel
-) {
+fun ResultsScreen(viewModel: QuestionnaireViewModel) {
     val questions = viewModel.questions
     val answers by viewModel.answers.collectAsStateWithLifecycle()
 
@@ -40,14 +38,16 @@ fun ResultsScreen(
         modifier = Modifier.fillMaxSize()
     ) { innerPadding ->
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
             Text(
                 text = stringResource(R.string.results_title),
                 style = MaterialTheme.typography.headlineLarge,
-                modifier = Modifier
+                modifier =
+                Modifier
                     .padding(16.dp)
                     .align(Alignment.CenterHorizontally)
             )
@@ -58,15 +58,18 @@ fun ResultsScreen(
             ) {
                 items(questions) { question ->
                     val answer = answers[question.id]
-                    val answerText = when (answer) {
-                        true -> stringResource(R.string.action_yes)
-                        false -> stringResource(R.string.action_no)
-                        else -> stringResource(R.string.result_answer_unanswered)
-                    }
-                    val itemContentDescription = stringResource(R.string.cd_result_item, question.text, answerText)
+                    val answerText =
+                        when (answer) {
+                            true -> stringResource(R.string.action_yes)
+                            false -> stringResource(R.string.action_no)
+                            else -> stringResource(R.string.result_answer_unanswered)
+                        }
+                    val itemContentDescription =
+                        stringResource(R.string.cd_result_item, question.text, answerText)
 
                     Card(
-                        modifier = Modifier
+                        modifier =
+                        Modifier
                             .fillMaxWidth()
                             .padding(vertical = 8.dp)
                             .semantics(mergeDescendants = true) {
@@ -89,7 +92,8 @@ fun ResultsScreen(
                                 Text(
                                     text = answerText,
                                     fontWeight = FontWeight.Bold,
-                                    color = when (answer) {
+                                    color =
+                                    when (answer) {
                                         true -> MaterialTheme.colorScheme.primary
                                         false -> MaterialTheme.colorScheme.error
                                         else -> MaterialTheme.colorScheme.outline
@@ -103,7 +107,8 @@ fun ResultsScreen(
 
             TextButton(
                 onClick = { viewModel.resetQuestionnaire() },
-                modifier = Modifier
+                modifier =
+                Modifier
                     .align(Alignment.CenterHorizontally)
                     .padding(16.dp)
                     .minTouchTarget()

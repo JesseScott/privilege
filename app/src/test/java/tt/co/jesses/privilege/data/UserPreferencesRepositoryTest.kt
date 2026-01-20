@@ -14,9 +14,8 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
 class UserPreferencesRepositoryTest {
-
     private val dataStore = mock<DataStore<Preferences>>()
-    private val CHECKLIST_FILLED = booleanPreferencesKey("checklist_filled")
+    private val checklistFilled = booleanPreferencesKey("checklist_filled")
     private lateinit var repository: UserPreferencesRepository
 
     // We use a MutableSharedFlow to control the dataStore.data emission
@@ -31,7 +30,7 @@ class UserPreferencesRepositoryTest {
     @Test
     fun `isPrivilegeChecklistFilled returns false by default`() = runTest {
         val preferences = mock<Preferences>()
-        whenever(preferences[CHECKLIST_FILLED]).thenReturn(null)
+        whenever(preferences[checklistFilled]).thenReturn(null)
         preferencesFlow.emit(preferences)
 
         val result = repository.isPrivilegeChecklistFilled.first()
@@ -41,7 +40,7 @@ class UserPreferencesRepositoryTest {
     @Test
     fun `isPrivilegeChecklistFilled returns true when saved`() = runTest {
         val preferences = mock<Preferences>()
-        whenever(preferences[CHECKLIST_FILLED]).thenReturn(true)
+        whenever(preferences[checklistFilled]).thenReturn(true)
         preferencesFlow.emit(preferences)
 
         val result = repository.isPrivilegeChecklistFilled.first()

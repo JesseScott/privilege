@@ -3,11 +3,11 @@ package tt.co.jesses.privilege.ui.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,16 +20,15 @@ import androidx.compose.ui.unit.dp
 import tt.co.jesses.privilege.R
 
 @Composable
-fun WelcomeScreen(
-    onStartClicked: () -> Unit
-) {
+fun WelcomeScreen(onStartClicked: () -> Unit) {
     val haptic = LocalHapticFeedback.current
 
     Scaffold(
         modifier = Modifier.fillMaxSize()
     ) { innerPadding ->
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
                 .padding(16.dp),
